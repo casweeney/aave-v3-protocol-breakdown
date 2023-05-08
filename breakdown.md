@@ -184,10 +184,5 @@ if (isCollateral && amountToWithdraw == userBalance) {
 Burns aTokens from the user and sends the equivalent amount of underlying token to the address specified in the ``params.to`` parameter.
 
 ```
-IAToken(reserveCache.aTokenAddress).burn(
-  msg.sender,
-  params.to,
-  amountToWithdraw,
-  reserveCache.nextLiquidityIndex
-);
+IAToken(reserveCache.aTokenAddress).burn(msg.sender, params.to, amountToWithdraw, reserveCache.nextLiquidityIndex);
 ```
