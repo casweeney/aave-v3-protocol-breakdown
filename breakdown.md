@@ -52,7 +52,7 @@ It is worth mentioning here that in the Pool.sol contract itself, it will mainly
 - libraries like DataTypes which holds and stores the function's main parameters in structs.
 
 ### funtion supply()
-The supply() function supplies an amount of underlying asset into the reserve, receiving in return overlying aTokens. These aTokens serves as a receipt that a user supplied assets to the pool.
+The ``supply()`` function supplies an amount of underlying asset into the reserve, receiving in return overlying aTokens. These aTokens serves as a receipt that a user supplied assets to the pool.
 
 Eg: User supplies 100 USDC and gets in return 100 aUSDC
 ```
@@ -68,7 +68,7 @@ function supply(
 - onBehalfOf: address that will receive the corresponding aTokens. Note: Only the onBehalfOf address will be able to withdraw asset from the pool
 - referralCode: unique code for 3rd party referral program integration. Use 0 (zero) for no referral.
 
-Inside the function we are going to find only the call to an internal function executeSupply() which is inside SupplyLogic.sol:
+Inside the function we are going to find only the call to an internal function ``executeSupply()`` which is inside ``SupplyLogic.sol``:
 
 ```
 SupplyLogic.executeSupply(
@@ -84,9 +84,9 @@ SupplyLogic.executeSupply(
 );
 ```
 
-You will notice DataTypes.ExecuteSupplyParams() call inside the above function's parameter. It is simply passing a list of parameters wrapped in a struct.
+You will notice ``DataTypes.ExecuteSupplyParams()`` call inside the above function's parameter. It is simply passing a list of parameters wrapped in a struct.
 
-Now let's look into the executeSupply() function found in the SupplyLogic.sol contract. We can split it in three parts:
+Now let's look into the ``executeSupply()`` function found in the ``SupplyLogic.sol`` contract. We can split it in three parts:
 - The updates and validation:
 ```
 reserve.updateState(reserveCache);
@@ -96,7 +96,7 @@ ValidationLogic.validateSupply(reserveCache, reserve, params.amount);
 reserve.updateInterestRates(reserveCache, params.asset, params.amount, 0);
 ```
 
-- From the code above, the first function resereve.updateState(reserveCache) will update the reserves with the provided reserveData from the specific asset passed as argument.
+- From the code above, the first function ``resereve.updateState(reserveCache)`` will update the reserves with the provided reserveData from the specific asset passed as argument.
 
 - Right after it, it will pass this data to validation where the main checks will be this asset fulfils the following:
 
@@ -106,11 +106,11 @@ require(!isPaused, Errors.RESERVE_PAUSED);
 require(!isFrozen, Errors.RESERVE_FROZEN);
 ```
 
-The above checks is inside th validateSupply() function found in the ValidationLogic.sol
+The above checks is inside the ``validateSupply()`` function found in ``the ValidationLogic.sol``
 
-- The last thing is to update the interest rates with the updateInterestRates() function, which receives as parameters, the reserves cached, the specific asset and the amount of the asset.
+- The last thing is to update the interest rates with the ``updateInterestRates()`` function, which receives as parameters, the reserves cached, the specific asset and the amount of the asset.
 
-- The main action of the function is where the supply of the ERC20 token is done, by using the safeTransferFrom function and the mint of aTokens. See the code below:
+- The main action of the function is where the supply of the ERC20 token is done, by using the ``safeTransferFrom()`` function and the ``mint()`` of aTokens. See the code below:
 ```
 IERC20(params.asset).safeTransferFrom(msg.sender, reserveCache.aTokenAddress, params.amount);
 ```
