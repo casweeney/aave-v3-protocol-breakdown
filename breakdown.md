@@ -51,6 +51,8 @@ It is worth mentioning here that in the Pool.sol contract itself, it will mainly
 - executeSupply() which is inside the SupplyLogic.sol or
 - libraries like DataTypes which holds and stores the function's main parameters in structs.
 
+==========================================================
+
 ### funtion supply()
 The ``supply()`` function supplies an amount of underlying asset into the reserve, receiving in return overlying aTokens. These aTokens serves as a receipt that a user supplied assets to the pool.
 
@@ -86,7 +88,10 @@ SupplyLogic.executeSupply(
 
 You will notice ``DataTypes.ExecuteSupplyParams()`` call inside the above function's parameter. It is simply passing a list of parameters wrapped in a struct.
 
-Now let's look into the ``executeSupply()`` function found in the ``SupplyLogic.sol`` contract. We can split it in three parts:
+Now let's look into the ``executeSupply()`` function found in the ``SupplyLogic.sol`` contract. 
+
+We can split it in three parts:
+
 - The updates and validation:
 ```
 reserve.updateState(reserveCache);
@@ -121,3 +126,70 @@ IAToken(reserveCache.aTokenAddress).mint(msg.sender, params.onBehalfOf, params.a
 
 - Setting the Collateral Value
 This will only happen if this is the first time the sender is making a supply. That is why in the code you will see a condition ``isFirstSupply`` The validation before modifying anything and finally the setter.
+
+
+============================================================
+
+### function withdraw()
+The withdraw function withdraws an amount of underlying asset from the reserve, burning the equivalent aTokens owned
+
+Eg: User has 100 aUSDC, calls the ``withdraw()`` function and receives 100USDC, burning the 100 aUSDC.
+
+This is the description provided in the IPool interface codebase and it is an excellent summary of what happens inside this function.
+
+```
+function withdraw(
+  address asset, 
+  uint256 amount, 
+  address to
+) external returns (uint256);
+```
+
+Just like the ``supply()`` function, ``withdraw()`` function is also directly calling to the internal function ``executeWithdraw()`` which is inside the ``SupplyLogic.sol``
+
+```
+SupplyLogic.executeWithdraw(
+  _reserves,
+  _reservesList,
+  _eModeCategories,
+  _usersConfig[msg.sender],
+  DataTypes.ExecuteWithdrawParams({
+    asset: asset,
+    amount: amount,
+    to: to,
+    reservesCount: _reservesCount,
+    oracle: ADDRESSES_PROVIDER.getPriceOracle(),
+    userEModeCategory: _usersEModeCategory[msg.sender]
+  })
+);
+```
+Let's divide what is happening inside the ``executeWithdraw()`` function into two parts:
+- Update and validate
+
+```
+ValidationLogic.validateWithdraw(reserveCache, amountToWithdraw, userBalance);
+
+reserve.updateInterestRates(reserveCache, params.asset, 0, amountToWithdraw);
+```
+
+Just like in the ``executeSupply()`` it validates the provided parameters in order to update interest rates.
+
+Then it will check one of the parameters provided which is ``isUsingAsCollateral()``. If this returns true and the amount desired to withdraw is as hight as the ``userBalance``, then it will cancel the existung collateral.
+
+```
+if (isCollateral && amountToWithdraw == userBalance) {
+  userConfig.setUsingAsCollateral(reserve.id, false);
+}
+```
+
+- Burn the aToken:
+Burns aTokens from the user and sends the equivalent amount of underlying token to the address specified in the ``params.to`` parameter.
+
+```
+IAToken(reserveCache.aTokenAddress).burn(
+  msg.sender,
+  params.to,
+  amountToWithdraw,
+  reserveCache.nextLiquidityIndex
+);
+```
