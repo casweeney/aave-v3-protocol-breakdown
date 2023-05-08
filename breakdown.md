@@ -1,5 +1,5 @@
 ### AAVE Code Explained Part 1
-Aave is a decentralized non-co=ustodial liquidity market protocol where users can participate as suppliers or borrowers.
+Aave is a decentralized non-custodial liquidity market protocol where users can participate as suppliers or borrowers.
 
 #### Suppliers & Borrowers
 Suppliers provide liquidity to the market and earn a passive income, while borrowers are able to borrow unexpected expenses, leveraging their holding.
@@ -14,7 +14,7 @@ The Aave Porotocol V3 contracts are divided into two repositories
 1. aave-v3-core
 2. aave-v3-periphery
 
-##### aave-v3-core
+#### aave-v3-core
 The aave-v3-core host or contains the core protocol V3 contracts that contains the logic for supply, borrow, liquidation, flashloans, a/s/v tokens, portal, pool configuration, oracles and interest rate strategies.
 
 The core protocol contracts fall in the following 4 categories:
@@ -23,7 +23,7 @@ The core protocol contracts fall in the following 4 categories:
 - Tokenization
 - Misc
 
-##### aave-v3-periphery
+#### aave-v3-periphery
 In the periphery repository, you will find the contracts related towards rewards, UI data provider, wallet balance provider and WETH gateway.
 
 The periphery contracts have two categories
@@ -31,7 +31,7 @@ The periphery contracts have two categories
 - Misc
 
 ### What can we do with Aave Protocol
-- Supplu and Earn:
+- Supply and Earn:
 By supplying you will earn passive income based on the market borrowing demand
 
 - Borrow:
