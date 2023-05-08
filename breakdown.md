@@ -120,4 +120,4 @@ IAToken(reserveCache.aTokenAddress).mint(msg.sender, params.onBehalfOf, params.a
 ```
 
 - Setting the Collateral Value
-This will only happen if this is the first time the sender is making a supply. That is why in the code you will see a condition ~isFirstSupply~ The validation before modifying anything and finally the setter.
+This will only happen if this is the first time the sender is making a supply. That is why in the code you will see a condition ~~isFirstSupply~~ The validation before modifying anything and finally the setter.
