@@ -51,9 +51,8 @@ It is worth mentioning here that in the Pool.sol contract itself, it will mainly
 - executeSupply() which is inside the SupplyLogic.sol or
 - libraries like DataTypes which holds and stores the function's main parameters in structs.
 
-==========================================================
-
 ### funtion supply()
+==========================================================
 The ``supply()`` function supplies an amount of underlying asset into the reserve, receiving in return overlying aTokens. These aTokens serves as a receipt that a user supplied assets to the pool.
 
 Eg: User supplies 100 USDC and gets in return 100 aUSDC
@@ -128,9 +127,8 @@ IAToken(reserveCache.aTokenAddress).mint(msg.sender, params.onBehalfOf, params.a
 This will only happen if this is the first time the sender is making a supply. That is why in the code you will see a condition ``isFirstSupply`` The validation before modifying anything and finally the setter.
 
 
-============================================================
-
 ### function withdraw()
+==========================================================
 The withdraw function withdraws an amount of underlying asset from the reserve, burning the equivalent aTokens owned
 
 Eg: User has 100 aUSDC, calls the ``withdraw()`` function and receives 100USDC, burning the 100 aUSDC.
