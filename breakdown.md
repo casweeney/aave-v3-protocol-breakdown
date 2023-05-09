@@ -52,7 +52,7 @@ It is worth mentioning here that in the Pool.sol contract itself, it will mainly
 - libraries like DataTypes which holds and stores the function's main parameters in structs.
 
 ### funtion supply()
-==========================================================
+========================================================== <br />
 The ``supply()`` function supplies an amount of underlying asset into the reserve, receiving in return overlying aTokens. These aTokens serves as a receipt that a user supplied assets to the pool.
 
 Eg: User supplies 100 USDC and gets in return 100 aUSDC
@@ -128,7 +128,7 @@ This will only happen if this is the first time the sender is making a supply. T
 
 
 ### function withdraw()
-==========================================================
+========================================================== <br />
 The withdraw function withdraws an amount of underlying asset from the reserve, burning the equivalent aTokens owned
 
 Eg: User has 100 aUSDC, calls the ``withdraw()`` function and receives 100USDC, burning the 100 aUSDC.
