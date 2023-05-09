@@ -69,7 +69,7 @@ function supply(
 - onBehalfOf: address that will receive the corresponding aTokens. Note: Only the onBehalfOf address will be able to withdraw asset from the pool
 - referralCode: unique code for 3rd party referral program integration. Use 0 (zero) for no referral.
 
-Inside the function we are going to find only the call to an internal function ``executeSupply()`` which is inside ``SupplyLogic.sol``:
+Inside the function we are going to find that it is only making a call to an internal function ``executeSupply()`` which is inside ``SupplyLogic.sol``:
 
 ```sh
 SupplyLogic.executeSupply(
