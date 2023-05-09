@@ -186,3 +186,20 @@ Burns aTokens from the user and sends the equivalent amount of underlying token 
 ```
 IAToken(reserveCache.aTokenAddress).burn(msg.sender, params.to, amountToWithdraw, reserveCache.nextLiquidityIndex);
 ```
+
+### function repay()
+========================================================== <br />
+The ``repay()`` function is called to repay a borrowed amount on a specific reserve, burning the equivalent debt tokens owned.
+
+Eg: User repays 100USDC, burning 100 variable/stable debt tokens of the ``onBehalfOf`` address
+
+```
+function repay(
+  address asset,
+  uint256 amount,
+  uint256 interestRateMode,
+  address onBehalfOf
+) external returns (uint256);
+```
+
+Just like in other functions, `repay` is also calling an internal function `executeRepay` inside the `BorrowLogic.sol`:
