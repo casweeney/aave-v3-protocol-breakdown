@@ -9,6 +9,40 @@ Liquidity is at the heart of the Aave Protocol as it enables the protocol's oper
 The liquidity of the protocol is measured by the availability of assets for basic protocol operations such as borrowing of assets backed by collateral and claiming of supplied assets along with accrued yield.
 - A lack of liquidity will block operations.
 
+## How Does AAVE Work?
+Aave work through lending pools
+- A lending pool is a smart contract that allows users to deposit and borrow money( crypto currencies)
+
+Every lending pool has a specific crypto currency. Lenders deposits tokens into a lending pool containing the same type of token or crypto currency. The
+
+For example: ETH owners will deposit into an ETH lending pool or USDC owners will deposit into a USDC lending pool.
+
+Just like banks, lenders or depositors will be able to earn interest and borrowers can borrow various assets at the cost of interest (which means they pay interest for borrowing).
+
+The rate of lending or borrowing is reflected in annualized figure called Annual Percentage Yield or Annual Percentage Rate
+
+#### LENDING
+When lenders deposits funds into a lending pool, the interest they earn, accumlates in form of aTokens. The letter "a" stands for Aave.
+
+aTokens are interest bearing tokens, native to the Aave protocol, that are minted and burned upon deposit and withdrawal of assets from the lending pools.
+
+Each aToken it pegged to the value of the corresponding cryptocurrency in the lending pool. Which means if you deposit funds into the ETH lending pool, you will receive aETH which will increase in amount as it passively accrues interest in your wallet.
+
+#### BORROWING
+To borrow cryptocurrency, one must deposit tokens that are worth more than the amount you will like to borrow.
+
+This is known as overcollaterization. Once this is done, borrowers can borrow a certain percentage of their collateral's value in dollars.
+
+The percentage is known as he collateral ratio, which is predetermined by the protocol or DAO.
+
+### Liquidation in Aave
+If you want to borrow $80 worth of USDT from AAVE and you are bringing ETH as collateral, you will need to deposit $100 worth of ETH. 
+
+Now if ETH increases in value over the period while you still held the USDT, when you bring back the USDT, and get back you ETH, you will return $80USDT but to get back your ETH which the value must has increased to $200 because of the increased value over time. On this example, this is profitable
+
+Looking at this from this other example: let's say you want to borrowed $80 USDT and want to deposit ETH, the Maximum Loan Value of ETH is 80% which means to borrow $80 USDT you must deposit $100 worth of ETH. So you deposited collateral in ETH worth $100. 
+Then while you are still holding the USDT, if the price of ETH drops to more than 82.5% of its value which is the liquidation percentage, AAVE will automatically take back your ETH and pay the lender and you will have to keep the $80 USDT that you borrowed.
+
 ## Contracts Overview
 The Aave Porotocol V3 contracts are divided into two repositories
 1. aave-v3-core
